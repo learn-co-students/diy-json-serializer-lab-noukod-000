@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'rails-controller-testing', '~> 0.0.3'
+gem 'selenium-webdriver', '~> 2.53', '>= 2.53.4'
 gem 'pry'
 gem 'pry-nav'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
