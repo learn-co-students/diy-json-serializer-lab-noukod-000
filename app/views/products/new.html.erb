@@ -1,15 +1,23 @@
-<h1>New Product</h1>
-<%= form_for @product do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br />
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <br />
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <br />
-  <%= f.label :inventory %>
-  <%= f.text_field :inventory %>
-  <%= f.submit "submit" %>
-<% end %>
+
+21 lines (20 sloc) 908 Bytes
+<div class="productName"><%= @product.name %></div>
+<a href="#" class="js-next" data-id="<%= @product.id %>">Next Product</a>
+<div class="productDescription"><%= @product.description %></div>
+<div class="productPrice">Price: $<%= @product.price %></div>
+<div class="productInventory">Inventory: <%= @product.inventory %></div>
+
+ <script type="text/javascript" charset="utf-8">
+  $(function(){
+    $(".js-next").on("click", function(){
+      var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+      $.getJSON("/products/" + nextId + "/data", function (data) {
+        $(".productName").text(data["name"]);
+        $(".productDescription").text(data["description"]);
+        $(".productPrice").text(data["price"]);
+        $(".productInventory").text(data["inventory"]);
+        // re-set the id to current on the link
+        $(".js-next").attr("data-id", data["id"]);
+      });
+    });
+  });
+</script>
